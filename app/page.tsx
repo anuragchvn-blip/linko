@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Image from 'next/image';
 import InfoSection from '@/components/InfoSection';
 
 export default function Home() {
@@ -29,7 +30,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-2"
           >
-            <span className="text-2xl">🔗</span>
+            <Image src="/logo.svg" alt="Linko" width={40} height={40} className="w-8 h-8 sm:w-10 sm:h-10" />
             <span className="text-xl sm:text-2xl font-bold text-primary">
               Linko
             </span>

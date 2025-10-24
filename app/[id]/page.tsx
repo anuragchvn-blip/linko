@@ -82,7 +82,7 @@ export default function UserProfilePage() {
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <a href="/" className="flex items-center gap-2 text-primary">
-              <span className="text-2xl">🔗</span>
+              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
               <span className="text-xl font-bold">Linko</span>
             </a>
             <ConnectButton />
@@ -128,7 +128,7 @@ export default function UserProfilePage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="flex justify-between items-center mb-8">
             <a href="/" className="flex items-center gap-2 text-primary">
-              <span className="text-2xl">🔗</span>
+              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
               <span className="text-xl font-bold">Linko</span>
             </a>
             <ConnectButton />
@@ -164,7 +164,7 @@ export default function UserProfilePage() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <a href="/" className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
-            <span className="text-2xl">🔗</span>
+            <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
             <span className="text-xl font-bold">Linko</span>
           </a>
           <ConnectButton />
@@ -307,7 +307,7 @@ export default function UserProfilePage() {
             href="/"
             className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
           >
-            <span className="text-lg">🔗</span>
+            <Image src="/logo.svg" alt="Linko" width={20} height={20} className="w-5 h-5" />
             <span className="font-semibold">Create your own Linko</span>
           </a>
         </motion.div>

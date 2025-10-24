@@ -13,7 +13,8 @@ export const metadata: Metadata = {
   title: "Linko - Your Web3 Identity",
   description: "A minimal Web3 bio link powered by Base",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.svg",
+    apple: "/logo.svg",
   },
 };
 
