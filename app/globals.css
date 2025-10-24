@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-secondary text-text;
+  }
+}
+
+@layer components {
+  .link-card {
+    @apply bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-accent transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary px-6 py-3 rounded-lg font-medium border-2 border-primary hover:bg-secondary transition-colors duration-200;
+  }
+}
+
+/* RainbowKit button centering */
+@layer utilities {
+  /* Ensure RainbowKit ConnectButton centers properly */
+  div[data-rk] {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* Center the button on mobile, auto width on desktop */
+  @media (min-width: 640px) {
+    div[data-rk] {
+      width: auto;
+    }
+  }
+}
