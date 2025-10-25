@@ -37,10 +37,19 @@ export default function UserProfilePage() {
   });
 
   // Write contract hook for saving profile CID
-  const { writeContract, data: hash, isPending: isWritePending } = useWriteContract();
+  const { 
+    writeContract, 
+    data: hash, 
+    isPending: isWritePending,
+    error: writeError 
+  } = useWriteContract();
 
   // Wait for transaction confirmation
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { 
+    isLoading: isConfirming, 
+    isSuccess: isConfirmed,
+    error: confirmError 
+  } = useWaitForTransactionReceipt({
     hash,
   });
 
@@ -58,6 +67,20 @@ export default function UserProfilePage() {
       refetchCID();
     }
   }, [isConfirmed, refetchCID]);
+
+  // Handle transaction errors
+  useEffect(() => {
+    if (writeError) {
+      console.error('Write contract error:', writeError);
+      setSaveStatus(`❌ Transaction failed: ${writeError.message}`);
+      setIsSaving(false);
+    }
+    if (confirmError) {
+      console.error('Confirmation error:', confirmError);
+      setSaveStatus(`❌ Confirmation failed: ${confirmError.message}`);
+      setIsSaving(false);
+    }
+  }, [writeError, confirmError]);
 
   const loadUserProfile = async () => {
     try {
@@ -119,6 +142,11 @@ export default function UserProfilePage() {
     localStorage.setItem(`linko_profile_${normalizedAddress}`, JSON.stringify(updatedData));
 
     try {
+      // Check if wallet is connected
+      if (!connectedAddress) {
+        throw new Error('Please connect your wallet first');
+      }
+
       // Upload to IPFS for decentralized storage
       const cid = await ipfsService.uploadProfile(updatedData);
       if (!cid) {
@@ -129,21 +157,21 @@ export default function UserProfilePage() {
 
       setSaveStatus('⛓️ Saving to blockchain...');
 
-      // Write CID to smart contract with gas configuration
+      // Write CID to smart contract
       writeContract({
         ...linkoProfileConfig,
         functionName: 'setProfileCID',
         args: [cid],
-        gas: BigInt(100000), // Set explicit gas limit
       });
 
       // Transaction is pending, wait for confirmation via useEffect
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving profile:', error);
-      setSaveStatus('❌ Error saving profile');
+      const errorMessage = error?.message || 'Unknown error';
+      setSaveStatus(`❌ ${errorMessage}`);
       setIsSaving(false);
-      setTimeout(() => setSaveStatus(''), 3000);
+      setTimeout(() => setSaveStatus(''), 5000);
     }
 
     setIsEditing(false);
