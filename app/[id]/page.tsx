@@ -157,9 +157,15 @@ export default function UserProfilePage() {
 
       setSaveStatus('⛓️ Saving to blockchain...');
 
-      // Write CID to smart contract
+      // Verify wallet is connected
+      if (!connectedAddress) {
+        throw new Error('Please connect your wallet first');
+      }
+
+      // Write CID to smart contract with explicit address
       writeContract({
-        ...linkoProfileConfig,
+        address: linkoProfileConfig.address,
+        abi: linkoProfileConfig.abi,
         functionName: 'setProfileCID',
         args: [cid],
       });
