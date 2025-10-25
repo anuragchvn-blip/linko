@@ -1,0 +1,16 @@
+<svg width="460" height="350" viewBox="0 0 460 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light blue background -->
+  <rect width="460" height="350" fill="#B8D4E8"/>
+  
+  <!-- Top curved shape (black) -->
+  <path d="M 0 120 Q 230 240, 460 120 L 460 0 L 0 0 Z" fill="#000000"/>
+  
+  <!-- Bottom curved shape (black) -->
+  <path d="M 0 230 Q 230 110, 460 230 L 460 350 L 0 350 Z" fill="#000000"/>
+  
+  <!-- Linko text -->
+  <text x="50" y="140" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="#000000">Linko</text>
+  
+  <!-- TM symbol -->
+  <text x="380" y="110" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#000000">™</text>
+</svg>

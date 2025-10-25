@@ -27,7 +27,7 @@ export default function ShareButton({ address, ensName }: ShareButtonProps) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded-full font-semibold hover:bg-gray-50 transition-all text-sm"
+        className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-[#7C3AED] text-white rounded-full font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all border-2 border-gray-900 text-base sm:text-lg"
       >
         Share Profile
       </button>

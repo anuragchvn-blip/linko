@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Image from 'next/image';
-import InfoSection from '@/components/InfoSection';
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -19,279 +18,432 @@ export default function Home() {
   }, [isConnected, address, router]);
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <InfoSection />
-      
+    <main className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-        <div className="flex items-center justify-between">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2"
-          >
-            <Image src="/logo.svg" alt="Linko" width={40} height={40} className="w-8 h-8 sm:w-10 sm:h-10" />
-            <span className="text-xl sm:text-2xl font-bold text-primary">
-              Linko
-            </span>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            <ConnectButton />
-          </motion.div>
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl">
+        <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg">
+          <div className="flex items-center justify-between">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center gap-2"
+            >
+              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-8 h-8" />
+              <span className="text-xl sm:text-2xl font-extrabold text-gray-900">
+                Linko
+              </span>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center gap-4"
+            >
+              <ConnectButton />
+            </motion.div>
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-        <div className="text-center flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 bg-gradient-to-b from-[#E8F5E9] to-white overflow-hidden">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full flex flex-col items-center"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 sm:mb-8 leading-[1.1] tracking-tight"
           >
-            <div className="inline-flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6 shadow-sm border border-gray-200">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Powered by Base Blockchain
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight px-4 text-center w-full">
-              Your Web3 Identity,
-              <br />
-              <span className="bg-gradient-to-r from-primary via-accent to-purple-500 bg-clip-text text-transparent">
-                All in One Place
-              </span>
-            </h1>
-            
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed px-4 text-center">
-              Connect your wallet, showcase NFTs, share projects, and meet people 
-              with similar interests — all with one beautiful link.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 px-4 w-full sm:w-auto">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto flex justify-center"
-              >
-                <ConnectButton />
-              </motion.div>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full sm:w-auto px-8 py-3 rounded-full font-semibold text-gray-700 bg-white shadow-md hover:shadow-lg border border-gray-200 hover:border-gray-300 transition-all text-center"
-              >
-                Learn More
-              </motion.button>
-            </div>
-          </motion.div>
-
-          {/* Hero Visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            Jumpstart your Web3 presence today
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-12 sm:mt-16 w-full"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-base sm:text-lg md:text-xl text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed font-normal"
           >
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200 mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-                {['👤', '🎨', '🤝', '⚡'].map((emoji, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + i * 0.1 }}
-                    className="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center text-4xl sm:text-6xl shadow-sm border border-gray-100"
-                  >
-                    {emoji}
-                  </motion.div>
-                ))}
-              </div>
+            <span className="font-mono text-sm sm:text-base">linko.xyz/</span>
+            <span className="font-bold text-[#0A66C2]">yourname</span>
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center items-center"
+          >
+            <div className="flex justify-center">
+              <ConnectButton />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 flex flex-col items-center"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Everything You Need
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            A complete Web3 identity solution with powerful features
-          </p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
-          {[
-            {
-              icon: '👤',
-              title: 'Profile Pictures',
-              description: 'Upload your photo and make your profile uniquely yours'
-            },
-            {
-              icon: '🤝',
-              title: 'Find Connections',
-              description: 'Meet people nearby who share your interests and passions'
-            },
-            {
-              icon: '🎨',
-              title: 'NFT Showcase',
-              description: 'Automatically display your NFT collection from your wallet'
-            },
-            {
-              icon: '⚡',
-              title: 'Web3 Projects',
-              description: 'Add and verify your favorite DApps with automatic verification'
-            },
-            {
-              icon: '🏷️',
-              title: 'Interests & Tags',
-              description: 'Add interests to connect with like-minded people'
-            },
-            {
-              icon: '🎵',
-              title: 'Rich Media',
-              description: 'Embed Spotify tracks, links, and social profiles'
-            }
-          ].map((feature, index) => (
+      {/* Feature 1: Create and Customize */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-[#FFF8E1] overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200 hover:border-gray-300 transition-all hover:shadow-md group w-full max-w-sm"
-            >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform border border-gray-100">
-                <span className="text-3xl sm:text-4xl">{feature.icon}</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 flex flex-col items-center"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get Started in Minutes
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            Simple steps to create your Web3 identity
-          </p>
-        </motion.div>
-
-        <div className="space-y-8">
-          {[
-            {
-              step: '01',
-              title: 'Connect Wallet',
-              description: 'Connect your Web3 wallet to get started instantly',
-              icon: '🔐'
-            },
-            {
-              step: '02',
-              title: 'Customize Profile',
-              description: 'Add your photo, bio, interests, and showcase your projects',
-              icon: '✨'
-            },
-            {
-              step: '03',
-              title: 'Share & Connect',
-              description: 'Share your link on social media and find like-minded people',
-              icon: '🚀'
-            }
-          ].map((item, index) => (
-            <motion.div
-              key={item.step}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 group bg-white rounded-3xl p-6 shadow-sm border border-gray-200"
+              transition={{ duration: 0.6 }}
+              className="order-2 lg:order-1"
             >
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-md group-hover:scale-110 transition-transform">
-                  {item.step}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+                Create and customize your Linko in minutes
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed font-normal">
+                Connect all your content across social media, websites, stores and more in one link in bio. Customize every detail to match your Web3 brand.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative order-1 lg:order-2"
+            >
+              <div className="bg-white rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 shadow-2xl max-w-md mx-auto">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-xl sm:text-3xl flex-shrink-0">
+                    👤
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-sm sm:text-lg text-gray-900 mb-1 truncate">@yourname</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Web3 Creator</div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl sm:text-4xl">{item.icon}</span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
-                    {item.title}
-                  </h3>
+                <div className="space-y-2 sm:space-y-3">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-lg sm:text-xl flex-shrink-0">🎨</span>
+                      <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate">My NFT Collection</span>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-lg sm:text-xl flex-shrink-0">⚡</span>
+                      <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate">DeFi Dashboard</span>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-lg sm:text-xl flex-shrink-0">🔗</span>
+                      <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate">My Website</span>
+                    </div>
+                  </motion.div>
                 </div>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {item.description}
-                </p>
               </div>
             </motion.div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-br from-primary via-accent to-purple-500 rounded-3xl p-8 sm:p-12 md:p-16 text-center shadow-lg flex flex-col items-center"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-            Ready to Stand Out?
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-            Join the future of Web3 identity. Create your profile in seconds.
-          </p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex justify-center w-full sm:w-auto"
+      {/* Feature 2: Share Everywhere */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="order-2"
+            >
+              <div className="bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 rounded-2xl sm:rounded-[2rem] p-4 sm:p-8 shadow-2xl max-w-md mx-auto">
+                <div className="text-center space-y-3 sm:space-y-4">
+                  <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-white rounded-full flex items-center justify-center text-3xl sm:text-5xl shadow-xl border-4 border-gray-900">
+                    🌐
+                  </div>
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-lg border-2 border-gray-900">
+                    <p className="text-xs sm:text-sm font-bold text-gray-900 mb-2 sm:mb-3 truncate">linko.xyz/yourname</p>
+                    <div className="flex justify-center gap-2">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-sm sm:text-lg border-2 border-gray-900 flex-shrink-0">
+                        𝕏
+                      </div>
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-pink-400 to-rose-600 rounded-full flex items-center justify-center text-white text-sm sm:text-lg border-2 border-gray-900 flex-shrink-0">
+                        📷
+                      </div>
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-sm sm:text-lg border-2 border-gray-900 flex-shrink-0">
+                        ▶
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="order-1"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+                Share your Linko anywhere you like!
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed font-normal">
+                Add your unique Linko URL to all the platforms and places you find your audience. Share your complete Web3 identity with one link.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature 3: Showcase NFTs */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-[#F3E5F5] overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+                Showcase your NFTs and Web3 projects
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed font-normal">
+                Automatically display your NFT collection and verified DApps. Track engagement and connect with your Web3 audience.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-white rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 shadow-2xl border-4 border-gray-900 max-w-md mx-auto">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                  {[
+                    { emoji: '🎨', bg: 'from-pink-200 to-purple-300' },
+                    { emoji: '🖼️', bg: 'from-blue-200 to-cyan-300' },
+                    { emoji: '✨', bg: 'from-yellow-200 to-orange-300' },
+                    { emoji: '🎭', bg: 'from-green-200 to-emerald-300' }
+                  ].map((nft, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ scale: 1.05, rotate: 2 }}
+                      className={`aspect-square bg-gradient-to-br ${nft.bg} rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-4xl border-2 border-gray-900 shadow-lg cursor-pointer`}
+                    >
+                      {nft.emoji}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Ticker */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto mb-8 sm:mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-4 leading-[1.1] tracking-tight"
           >
-            <ConnectButton />
+            The only link in bio trusted by Web3
+          </motion.h2>
+        </div>
+        
+        <div className="relative">
+          <div className="flex gap-4 sm:gap-6 animate-scroll whitespace-nowrap">
+            {['creators', 'influencers', 'NFT collectors', 'DeFi users', 'DAOs', 'blockchain devs', 'crypto traders', 'Web3 artists', 'metaverse builders', 'creators', 'influencers', 'NFT collectors'].map((word, i) => (
+              <span key={i} className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-300">
+                {word}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#E8F5E9] overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-10 sm:mb-16 leading-[1.1] tracking-tight"
+          >
+            Everything you need in one place
+          </motion.h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {[
+              {
+                icon: '🔗',
+                title: 'One link for everything',
+                description: 'Share your entire Web3 identity with a single link'
+              },
+              {
+                icon: '🎨',
+                title: 'NFT showcase',
+                description: 'Automatically display your NFT collection'
+              },
+              {
+                icon: '⚡',
+                title: 'Verified DApps',
+                description: 'Add and verify your favorite Web3 projects'
+              },
+              {
+                icon: '🤝',
+                title: 'Find connections',
+                description: 'Meet people with similar interests nearby'
+              },
+              {
+                icon: '👤',
+                title: 'Custom profiles',
+                description: 'Personalize with photos, bio, and interests'
+              },
+              {
+                icon: '📊',
+                title: 'Built on Base',
+                description: 'Fast, secure, and decentralized'
+              }
+            ].map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{feature.icon}</div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#FFF8E1] overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 sm:mb-8 leading-[1.1] tracking-tight"
+          >
+            Jumpstart your Web3 presence today
+          </motion.h2>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mb-6 sm:mb-8"
+          >
+            <div className="inline-flex items-center gap-2 text-base sm:text-lg md:text-xl text-gray-600 flex-wrap justify-center">
+              <span className="font-mono text-sm sm:text-base">linko.xyz/</span>
+              <span className="font-bold text-[#0A66C2]">yourname</span>
+            </div>
           </motion.div>
-        </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="flex justify-center items-center"
+          >
+            <div className="flex justify-center">
+              <ConnectButton />
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-gray-200">
-        <div className="text-center text-gray-600">
-          <p className="mb-2 text-sm sm:text-base">Built with ❤️ on Base</p>
-          <p className="text-xs sm:text-sm">Linko © 2025 - Your Web3 Identity Platform</p>
+      <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
+            <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-8 h-8" />
+                <span className="text-xl sm:text-2xl font-extrabold text-gray-900">Linko</span>
+              </div>
+              <p className="text-sm sm:text-base text-gray-600">Your Web3 identity platform</p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Company</h4>
+              <ul className="space-y-2 text-sm sm:text-base text-gray-600">
+                <li><a href="#" className="hover:text-[#0A66C2] transition">About</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Blog</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Careers</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Community</h4>
+              <ul className="space-y-2 text-sm sm:text-base text-gray-600">
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Discord</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Twitter</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">GitHub</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Support</h4>
+              <ul className="space-y-2 text-sm sm:text-base text-gray-600">
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Help Center</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Privacy</a></li>
+                <li><a href="#" className="hover:text-[#0A66C2] transition">Terms</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="pt-6 sm:pt-8 border-t border-gray-100 text-center text-sm sm:text-base text-gray-600">
+            <p className="mb-2">Built with ❤️ on Base Blockchain</p>
+            <p className="text-xs sm:text-sm">© 2025 Linko. All rights reserved.</p>
+          </div>
         </div>
       </footer>
+
+      <style jsx global>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+      `}</style>
     </main>
   );
 }

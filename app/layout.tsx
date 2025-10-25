@@ -11,10 +11,22 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Linko - Your Web3 Identity",
-  description: "A minimal Web3 bio link powered by Base",
+  description: "A minimal Web3 bio link powered by Base. Share your complete Web3 identity with one link.",
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",
+    shortcut: "/logo.svg",
+  },
+  openGraph: {
+    title: "Linko - Your Web3 Identity",
+    description: "A minimal Web3 bio link powered by Base. Share your complete Web3 identity with one link.",
+    images: ["/logo-full.svg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Linko - Your Web3 Identity",
+    description: "A minimal Web3 bio link powered by Base. Share your complete Web3 identity with one link.",
+    images: ["/logo-full.svg"],
   },
 };
 

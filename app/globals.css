@@ -3,8 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply overflow-x-hidden;
+  }
+  
   body {
-    @apply bg-secondary text-text;
+    @apply bg-white text-gray-900 overflow-x-hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  * {
+    box-sizing: border-box;
   }
 }
 
@@ -22,19 +34,25 @@
   }
 }
 
-/* RainbowKit button centering */
+/* RainbowKit button mobile responsiveness */
 @layer utilities {
-  /* Ensure RainbowKit ConnectButton centers properly */
-  div[data-rk] {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  /* Mobile-first RainbowKit styling */
+  button[data-testid="rk-connect-button"],
+  div[data-testid="rk-account-button"] {
+    @apply text-sm sm:text-base !important;
+    padding: 0.5rem 1rem !important;
+    white-space: nowrap !important;
   }
   
-  /* Center the button on mobile, auto width on desktop */
   @media (min-width: 640px) {
-    div[data-rk] {
-      width: auto;
+    button[data-testid="rk-connect-button"],
+    div[data-testid="rk-account-button"] {
+      padding: 0.625rem 1.5rem !important;
     }
+  }
+  
+  /* Prevent horizontal scroll */
+  .overflow-x-clip {
+    overflow-x: clip;
   }
 }

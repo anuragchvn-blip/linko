@@ -68,8 +68,8 @@ export default function UserProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-pulse text-primary text-lg">Loading profile...</div>
+      <div className="min-h-screen flex items-center justify-center bg-white overflow-x-hidden">
+        <div className="animate-pulse text-[#0A66C2] text-lg sm:text-xl font-bold">Loading profile...</div>
       </div>
     );
   }
@@ -77,36 +77,43 @@ export default function UserProfilePage() {
   // Empty profile AND it's their own profile
   if (profileData?.isEmpty && isOwnProfile) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <div className="min-h-screen bg-gradient-to-b from-[#FFF8E1] to-white overflow-x-hidden">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <a href="/" className="flex items-center gap-2 text-primary">
-              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
-              <span className="text-xl font-bold">Linko</span>
-            </a>
-            <ConnectButton />
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-3xl">
+            <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg flex justify-between items-center">
+              <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
+                <span className="text-lg sm:text-2xl font-extrabold text-gray-900">Linko</span>
+              </a>
+              <ConnectButton />
+            </div>
           </div>
+          
+          {/* Spacer for fixed header */}
+          <div className="h-20 sm:h-24"></div>
 
           {/* Welcome Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm text-center mb-6"
+            className="bg-white rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-12 md:p-16 shadow-2xl border-4 border-gray-900 text-center mb-6"
           >
-            <div className="text-6xl mb-4">✨</div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+            <div className="text-6xl sm:text-7xl md:text-8xl mb-4 sm:mb-6">✨</div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-[1.1] tracking-tight">
               Welcome to Your Linko!
             </h1>
-            <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 md:mb-10 max-w-lg mx-auto leading-relaxed">
               Let's set up your Web3 identity. Add your photo, bio, interests, and showcase your projects!
             </p>
-            <button
-              onClick={() => setIsEditing(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all text-lg"
-            >
-              Create Your Profile 🚀
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setIsEditing(true)}
+                className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-[#0A66C2] text-white rounded-full font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:hover:translate-x-[3px] sm:hover:translate-y-[3px] sm:hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all text-base sm:text-lg md:text-xl border-2 border-gray-900"
+              >
+                Create Your Profile 🚀
+              </button>
+            </div>
           </motion.div>
 
           {/* Editor */}
@@ -124,32 +131,40 @@ export default function UserProfilePage() {
   // Empty profile but NOT their own
   if (profileData?.isEmpty && !isOwnProfile) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="flex justify-between items-center mb-8">
-            <a href="/" className="flex items-center gap-2 text-primary">
-              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
-              <span className="text-xl font-bold">Linko</span>
-            </a>
-            <ConnectButton />
+      <div className="min-h-screen bg-gradient-to-b from-[#F3E5F5] to-white overflow-x-hidden">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          {/* Header */}
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-3xl">
+            <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg flex justify-between items-center">
+              <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
+                <span className="text-lg sm:text-2xl font-extrabold text-gray-900">Linko</span>
+              </a>
+              <ConnectButton />
+            </div>
           </div>
+          
+          {/* Spacer for fixed header */}
+          <div className="h-20 sm:h-24"></div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm text-center"
+            className="bg-white rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-12 md:p-16 shadow-2xl border-4 border-gray-900 text-center"
           >
-            <div className="text-6xl mb-4">👤</div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{shortAddress}</h2>
-            <p className="text-gray-600 mb-8">
+            <div className="text-6xl sm:text-7xl md:text-8xl mb-4 sm:mb-6">👤</div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 leading-[1.1] tracking-tight">{shortAddress}</h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 md:mb-10 leading-relaxed">
               This user hasn&apos;t set up their Linko profile yet.
             </p>
-            <a
-              href="/"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
-            >
-              Create Your Own Profile
-            </a>
+            <div className="flex justify-center">
+              <a
+                href="/"
+                className="inline-block w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-[#7C3AED] text-white rounded-full font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:hover:translate-x-[3px] sm:hover:translate-y-[3px] sm:hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all text-base sm:text-lg md:text-xl border-2 border-gray-900"
+              >
+                Create Your Own Profile
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -158,37 +173,42 @@ export default function UserProfilePage() {
 
   // Full Profile View
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div className="min-h-screen bg-gradient-to-b from-[#E8F5E9] via-white to-[#FFF8E1] overflow-x-hidden">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <a href="/" className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
-            <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
-            <span className="text-xl font-bold">Linko</span>
-          </a>
-          <ConnectButton />
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-3xl">
+          <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg flex justify-between items-center">
+            <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <Image src="/logo.svg" alt="Linko" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
+              <span className="text-lg sm:text-2xl font-extrabold text-gray-900">Linko</span>
+            </a>
+            <ConnectButton />
+          </div>
         </div>
+        
+        {/* Spacer for fixed header */}
+        <div className="h-20 sm:h-24"></div>
 
         {/* Profile Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-8 sm:mb-10"
         >
           {/* Avatar */}
-          <div className="mb-4">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full overflow-hidden shadow-lg border-4 border-white">
+          <div className="mb-4 sm:mb-6">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-2xl border-4 border-gray-900">
               {profileData?.avatarUrl ? (
                 <Image
                   src={profileData.avatarUrl}
                   alt={profileData.name || 'Profile'}
-                  width={112}
-                  height={112}
+                  width={128}
+                  height={128}
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-4xl sm:text-5xl">
+                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-4xl sm:text-6xl">
                   👤
                 </div>
               )}
@@ -196,28 +216,28 @@ export default function UserProfilePage() {
           </div>
 
           {/* Name */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 sm:mb-3 leading-[1.1] tracking-tight">
             {profileData?.name || shortAddress}
           </h1>
           
           {profileData?.name && (
-            <p className="text-sm text-gray-500 mb-3">{shortAddress}</p>
+            <p className="text-sm sm:text-base text-gray-500 mb-3 sm:mb-4 font-medium">{shortAddress}</p>
           )}
 
           {/* Bio */}
           {profileData?.bio && (
-            <p className="text-sm sm:text-base text-gray-600 mb-4 max-w-md mx-auto px-4">
+            <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 max-w-xl mx-auto leading-relaxed">
               {profileData.bio}
             </p>
           )}
 
           {/* Interests */}
           {profileData?.interests && profileData.interests.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-2 mb-6 px-4">
+            <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8">
               {profileData.interests.map((interest: string, index: number) => (
                 <span
                   key={index}
-                  className="bg-white text-gray-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-sm border border-gray-200"
+                  className="bg-white text-gray-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] border-2 border-gray-900"
                 >
                   {interest}
                 </span>
@@ -226,16 +246,18 @@ export default function UserProfilePage() {
           )}
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-10">
             {isOwnProfile && (
               <button
                 onClick={() => setIsEditing(!isEditing)}
-                className="w-full sm:w-auto px-6 py-2.5 bg-white text-gray-900 rounded-full font-semibold shadow-md hover:shadow-lg transition-all border border-gray-200 hover:border-gray-300"
+                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white text-gray-900 rounded-full font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all border-2 border-gray-900 text-base sm:text-lg"
               >
                 {isEditing ? '✕ Cancel' : '✏️ Edit Profile'}
               </button>
             )}
-            <ShareButton address={identifier} ensName={null} />
+            <div className="w-full sm:w-auto flex justify-center">
+              <ShareButton address={identifier} ensName={null} />
+            </div>
           </div>
         </motion.div>
 
@@ -301,15 +323,17 @@ export default function UserProfilePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-12 text-center"
+          className="mt-12 sm:mt-16 text-center"
         >
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
-          >
-            <Image src="/logo.svg" alt="Linko" width={20} height={20} className="w-5 h-5" />
-            <span className="font-semibold">Create your own Linko</span>
-          </a>
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-gray-900 inline-block">
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base md:text-lg text-gray-900 hover:text-[#0A66C2] transition-colors font-bold"
+            >
+              <Image src="/logo.svg" alt="Linko" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span>Create your own Linko</span>
+            </a>
+          </div>
         </motion.div>
       </div>
     </div>
