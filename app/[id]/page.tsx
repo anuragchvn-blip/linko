@@ -120,19 +120,12 @@ export default function UserProfilePage() {
 
     try {
       // Upload to IPFS for decentralized storage
-      const ipfsUrl = await ipfsService.uploadProfile(updatedData);
-      if (!ipfsUrl) {
+      const cid = await ipfsService.uploadProfile(updatedData);
+      if (!cid) {
         throw new Error('Failed to upload to IPFS');
       }
 
-      // Extract CID from the URL
-      const cid = ipfsUrl.split('/ipfs/')[1]?.split('/')[0];
-      if (!cid) {
-        throw new Error('Failed to extract CID from IPFS URL');
-      }
-
-      console.log('Profile uploaded to IPFS:', ipfsUrl);
-      console.log('CID:', cid);
+      console.log('Profile uploaded to IPFS with CID:', cid);
 
       setSaveStatus('⛓️ Saving to blockchain...');
 
