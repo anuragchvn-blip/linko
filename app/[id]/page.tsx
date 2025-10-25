@@ -129,11 +129,12 @@ export default function UserProfilePage() {
 
       setSaveStatus('⛓️ Saving to blockchain...');
 
-      // Write CID to smart contract
+      // Write CID to smart contract with gas configuration
       writeContract({
         ...linkoProfileConfig,
         functionName: 'setProfileCID',
         args: [cid],
+        gas: BigInt(100000), // Set explicit gas limit
       });
 
       // Transaction is pending, wait for confirmation via useEffect
