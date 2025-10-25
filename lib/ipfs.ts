@@ -14,6 +14,7 @@ export class IPFSService {
 
   private async initializeClient() {
     try {
+      // @ts-ignore - web3.storage types may not be available
       const { Web3Storage } = await import('web3.storage');
       this.client = new Web3Storage({ token: web3StorageToken! });
     } catch (error) {
