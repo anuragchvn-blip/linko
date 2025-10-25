@@ -9,7 +9,7 @@ dotenv.config({ path: "./.env.local" });
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.20",
+    version: "0.8.19", // Downgraded from 0.8.20 for better compatibility
     settings: {
       optimizer: {
         enabled: true,
