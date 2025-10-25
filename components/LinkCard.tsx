@@ -22,7 +22,7 @@ export default function LinkCard({ link, index }: LinkCardProps) {
     'from-rose-100 to-pink-100',
     'from-indigo-100 to-purple-100',
   ];
-  
+
   const gradient = gradients[index % gradients.length];
 
   return (

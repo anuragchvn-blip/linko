@@ -60,14 +60,14 @@ export default function ProfileEditor({ initialData, onSave }: ProfileEditorProp
 
   const verifyDApp = async (index: number) => {
     const dapp = dapps[index];
-    const isDApp = 
-      dapp.url.includes('app.') || 
-      dapp.url.includes('swap') || 
+    const isDApp =
+      dapp.url.includes('app.') ||
+      dapp.url.includes('swap') ||
       dapp.url.includes('dex') ||
       dapp.url.includes('.fi') ||
       dapp.url.includes('defi') ||
       dapp.url.includes('protocol');
-    
+
     updateDApp(index, 'verified', isDApp);
   };
 
@@ -84,7 +84,7 @@ export default function ProfileEditor({ initialData, onSave }: ProfileEditorProp
       <h3 className="text-lg sm:text-xl font-bold text-gray-900">Edit Profile</h3>
 
       {/* Profile Picture */}
-      <ProfilePictureUpload 
+      <ProfilePictureUpload
         currentImage={avatarUrl}
         onImageChange={setAvatarUrl}
       />
@@ -271,11 +271,10 @@ export default function ProfileEditor({ initialData, onSave }: ProfileEditorProp
                 />
                 <button
                   onClick={() => verifyDApp(index)}
-                  className={`px-3 sm:px-4 py-2 rounded-xl font-medium transition-colors text-sm whitespace-nowrap ${
-                    dapp.verified
+                  className={`px-3 sm:px-4 py-2 rounded-xl font-medium transition-colors text-sm whitespace-nowrap ${dapp.verified
                       ? 'bg-green-500 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
+                    }`}
                 >
                   {dapp.verified ? '✓ Verified' : 'Verify'}
                 </button>
@@ -301,8 +300,8 @@ export default function ProfileEditor({ initialData, onSave }: ProfileEditorProp
 
       {/* Save Button */}
       <div className="flex gap-3 pt-4">
-        <button 
-          onClick={handleSave} 
+        <button
+          onClick={handleSave}
           className="flex-1 bg-gradient-to-r from-primary to-accent text-white py-3 sm:py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all text-sm sm:text-base"
         >
           Save Profile ✨

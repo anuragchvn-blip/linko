@@ -7,13 +7,13 @@ export function isValidEthereumAddress(address: string): boolean {
 export async function fetchNFTsFromAlchemy(address: string, apiKey: string) {
   try {
     const response = await fetch(
-      `https://base-mainnet.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${address}&limit=4`
+      `https://polygon-mainnet.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${address}&limit=4`
     );
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch NFTs');
     }
-    
+
     const data = await response.json();
     return data.ownedNfts || [];
   } catch (error) {

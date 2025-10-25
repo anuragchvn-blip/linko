@@ -27,13 +27,13 @@ export default function NFTBadges({ address }: NFTBadgesProps) {
       // In production, fetch NFTs from Alchemy NFT API
       // For now, using placeholder data
       const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
-      
+
       if (apiKey) {
         // Fetch from Alchemy
         const response = await fetch(
-          `https://base-mainnet.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${address}&limit=4`
+          `https://polygon-mainnet.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${address}&limit=4`
         );
-        
+
         if (response.ok) {
           const data = await response.json();
           const nftData = data.ownedNfts?.slice(0, 4).map((nft: any) => ({

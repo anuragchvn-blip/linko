@@ -3,13 +3,13 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
-import { base, baseSepolia } from 'wagmi/chains';
+import { polygon, polygonAmoy } from 'wagmi/chains';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const config = getDefaultConfig({
   appName: 'Linko',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
-  chains: [base, baseSepolia],
+  chains: [polygon, polygonAmoy],
   ssr: true,
 });
 

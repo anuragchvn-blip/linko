@@ -90,11 +90,10 @@ export default function ShareButton({ address, ensName }: ShareButtonProps) {
                       />
                       <button
                         onClick={copyToClipboard}
-                        className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap ${
-                          copied
+                        className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap ${copied
                             ? 'bg-green-500 text-white'
                             : 'bg-primary text-white hover:bg-accent'
-                        }`}
+                          }`}
                       >
                         {copied ? '✓ Copied!' : 'Copy'}
                       </button>
@@ -111,11 +110,11 @@ export default function ShareButton({ address, ensName }: ShareButtonProps) {
                       className="flex items-center justify-center gap-2 w-full bg-[#1DA1F2] text-white py-3 px-4 rounded-xl font-semibold hover:bg-[#1a8cd8] transition-colors"
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
                       Share on X
                     </a>
-                    
+
                     {navigator.share && (
                       <button
                         onClick={() => {

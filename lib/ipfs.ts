@@ -35,7 +35,7 @@ export class IPFSService {
     try {
       const blob = new Blob([JSON.stringify(profileData)], { type: 'application/json' });
       const file = new File([blob], 'profile.json');
-      
+
       const cid = await this.client.put([file], {
         name: 'Linko Profile',
         maxRetries: 3,

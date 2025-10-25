@@ -9,9 +9,9 @@ interface ProfilePictureUploadProps {
   onImageChange: (imageUrl: string) => void;
 }
 
-export default function ProfilePictureUpload({ 
-  currentImage, 
-  onImageChange 
+export default function ProfilePictureUpload({
+  currentImage,
+  onImageChange
 }: ProfilePictureUploadProps) {
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const [uploading, setUploading] = useState(false);
@@ -48,7 +48,7 @@ export default function ProfilePictureUpload({
       // Optional: Upload to IPFS if you want decentralized storage
       // For now, we'll use base64 data URLs stored in localStorage
       // In production, you'd upload to IPFS or a cloud storage service
-      
+
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Failed to upload image');
@@ -70,7 +70,7 @@ export default function ProfilePictureUpload({
       <label className="block text-sm font-semibold text-text">
         Profile Picture
       </label>
-      
+
       <div className="flex items-center gap-6">
         {/* Preview Circle */}
         <div className="relative">
@@ -92,7 +92,7 @@ export default function ProfilePictureUpload({
               </div>
             )}
           </motion.div>
-          
+
           {preview && !uploading && (
             <motion.button
               initial={{ scale: 0 }}
@@ -116,14 +116,13 @@ export default function ProfilePictureUpload({
             className="hidden"
             id="profile-picture-input"
           />
-          
+
           <label
             htmlFor="profile-picture-input"
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all cursor-pointer ${
-              uploading
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all cursor-pointer ${uploading
                 ? 'bg-gray-300 cursor-not-allowed'
                 : 'bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:scale-105'
-            }`}
+              }`}
           >
             {uploading ? (
               <>
@@ -152,7 +151,7 @@ export default function ProfilePictureUpload({
               </>
             )}
           </label>
-          
+
           <p className="text-xs text-gray-500 mt-2">
             JPG, PNG or GIF. Max size 5MB.
           </p>

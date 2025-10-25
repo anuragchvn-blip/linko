@@ -13,7 +13,8 @@ export default function Home() {
 
   useEffect(() => {
     if (isConnected && address) {
-      router.push(`/${address}`);
+      // Normalize address to lowercase for consistent routing
+      router.push(`/${address.toLowerCase()}`);
     }
   }, [isConnected, address, router]);
 
@@ -23,7 +24,7 @@ export default function Home() {
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl">
         <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg">
           <div className="flex items-center justify-between">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="flex items-center gap-2"
@@ -33,7 +34,7 @@ export default function Home() {
                 Linko
               </span>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -56,7 +57,7 @@ export default function Home() {
           >
             Jumpstart your Web3 presence today
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -66,7 +67,7 @@ export default function Home() {
             <span className="font-mono text-sm sm:text-base">linko.xyz/</span>
             <span className="font-bold text-[#0A66C2]">yourname</span>
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,7 +99,7 @@ export default function Home() {
                 Connect all your content across social media, websites, stores and more in one link in bio. Customize every detail to match your Web3 brand.
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -117,7 +118,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="space-y-2 sm:space-y-3">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
                   >
@@ -126,7 +127,7 @@ export default function Home() {
                       <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate">My NFT Collection</span>
                     </div>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
                   >
@@ -135,7 +136,7 @@ export default function Home() {
                       <span className="font-semibold text-xs sm:text-sm text-gray-900 truncate">DeFi Dashboard</span>
                     </div>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl border-2 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
                   >
@@ -184,7 +185,7 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -220,7 +221,7 @@ export default function Home() {
                 Automatically display your NFT collection and verified DApps. Track engagement and connect with your Web3 audience.
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -266,7 +267,7 @@ export default function Home() {
             The only link in bio trusted by Web3
           </motion.h2>
         </div>
-        
+
         <div className="relative">
           <div className="flex gap-4 sm:gap-6 animate-scroll whitespace-nowrap">
             {['creators', 'influencers', 'NFT collectors', 'DeFi users', 'DAOs', 'blockchain devs', 'crypto traders', 'Web3 artists', 'metaverse builders', 'creators', 'influencers', 'NFT collectors'].map((word, i) => (
@@ -289,7 +290,7 @@ export default function Home() {
           >
             Everything you need in one place
           </motion.h2>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
@@ -319,7 +320,7 @@ export default function Home() {
               },
               {
                 icon: '📊',
-                title: 'Built on Base',
+                title: 'Built on Polygon',
                 description: 'Fast, secure, and decentralized'
               }
             ].map((feature, i) => (
@@ -355,7 +356,7 @@ export default function Home() {
           >
             Jumpstart your Web3 presence today
           </motion.h2>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -368,7 +369,7 @@ export default function Home() {
               <span className="font-bold text-[#0A66C2]">yourname</span>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -394,7 +395,7 @@ export default function Home() {
               </div>
               <p className="text-sm sm:text-base text-gray-600">Your Web3 identity platform</p>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Company</h4>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
@@ -403,7 +404,7 @@ export default function Home() {
                 <li><a href="#" className="hover:text-[#0A66C2] transition">Careers</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Community</h4>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
@@ -412,7 +413,7 @@ export default function Home() {
                 <li><a href="#" className="hover:text-[#0A66C2] transition">GitHub</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">Support</h4>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
@@ -422,9 +423,9 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          
+
           <div className="pt-6 sm:pt-8 border-t border-gray-100 text-center text-sm sm:text-base text-gray-600">
-            <p className="mb-2">Built with ❤️ on Base Blockchain</p>
+            <p className="mb-2">Built with ❤️ on Polygon Blockchain</p>
             <p className="text-xs sm:text-sm">© 2025 Linko. All rights reserved.</p>
           </div>
         </div>

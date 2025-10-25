@@ -17,9 +17,9 @@ interface NearbyConnectionsProps {
   userAddress: string;
 }
 
-export default function NearbyConnections({ 
-  userInterests, 
-  userAddress 
+export default function NearbyConnections({
+  userInterests,
+  userAddress
 }: NearbyConnectionsProps) {
   const [connections, setConnections] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,11 +32,11 @@ export default function NearbyConnections({
 
   const findConnections = () => {
     setLoading(true);
-    
+
     // In production, this would query a backend/database
     // For now, we'll simulate with mock data from localStorage
     const allProfiles: Profile[] = [];
-    
+
     // Scan localStorage for other profiles
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -62,12 +62,12 @@ export default function NearbyConnections({
     const matches = allProfiles
       .map(profile => {
         const commonInterests = profile.interests.filter(interest =>
-          userInterests.some(ui => 
+          userInterests.some(ui =>
             ui.toLowerCase().includes(interest.toLowerCase()) ||
             interest.toLowerCase().includes(ui.toLowerCase())
           )
         );
-        
+
         return {
           ...profile,
           matchScore: commonInterests.length,
@@ -178,11 +178,10 @@ export default function NearbyConnections({
             <button
               key={filter.key}
               onClick={() => setSelectedFilter(filter.key as any)}
-              className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
-                selectedFilter === filter.key
+              className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${selectedFilter === filter.key
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-600 hover:text-primary'
-              }`}
+                }`}
             >
               {filter.label}
             </button>
@@ -194,7 +193,7 @@ export default function NearbyConnections({
         <div className="space-y-3">
           {filteredConnections.slice(0, 10).map((connection: any, index) => {
             const match = getMatchLevel(connection.matchScore);
-            
+
             return (
               <motion.a
                 key={connection.address}
@@ -232,7 +231,7 @@ export default function NearbyConnections({
                         {match.text}
                       </span>
                     </div>
-                    
+
                     {connection.bio && (
                       <p className="text-sm text-gray-600 mb-2 line-clamp-1">
                         {connection.bio}

@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import Image from 'next/image';
 import LinkCard from '@/components/LinkCard';
 import NFTBadges from '@/components/NFTBadges';
@@ -13,6 +13,9 @@ import VerifiedDApps from '@/components/VerifiedDApps';
 import ShareButton from '@/components/ShareButton';
 import NearbyConnections from '@/components/NearbyConnections';
 import ProfileEditor from '@/components/ProfileEditor';
+import { ipfsService } from '@/lib/ipfs';
+import { linkoProfileConfig } from '@/lib/contract';
+import { Address } from 'viem';
 
 export default function UserProfilePage() {
   const params = useParams();
@@ -21,23 +24,72 @@ export default function UserProfilePage() {
   const [profileData, setProfileData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<string>('');
 
   const isOwnProfile = connectedAddress?.toLowerCase() === identifier?.toLowerCase();
+
+  // Read profile CID from smart contract
+  const { data: profileCID, refetch: refetchCID } = useReadContract({
+    ...linkoProfileConfig,
+    functionName: 'getProfileCID',
+    args: [identifier as Address],
+  });
+
+  // Write contract hook for saving profile CID
+  const { writeContract, data: hash, isPending: isWritePending } = useWriteContract();
+
+  // Wait for transaction confirmation
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   useEffect(() => {
     loadUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [identifier, connectedAddress]);
+  }, [identifier, connectedAddress, profileCID]);
+
+  // Handle transaction confirmation
+  useEffect(() => {
+    if (isConfirmed) {
+      setSaveStatus('✅ Profile saved on-chain!');
+      setIsSaving(false);
+      setTimeout(() => setSaveStatus(''), 3000);
+      refetchCID();
+    }
+  }, [isConfirmed, refetchCID]);
 
   const loadUserProfile = async () => {
     try {
-      const stored = localStorage.getItem(`linko_profile_${identifier}`);
-      
+      const normalizedAddress = identifier?.toLowerCase();
+
+      // Try localStorage first for quick access
+      const stored = localStorage.getItem(`linko_profile_${normalizedAddress}`);
+
       if (stored) {
-        setProfileData(JSON.parse(stored));
-      } else {
+        const parsedData = JSON.parse(stored);
+        setProfileData(parsedData);
+      }
+
+      // Try to get CID from smart contract
+      let cid = profileCID as string;
+
+      if (cid && cid !== '') {
+        try {
+          // Fetch profile from IPFS using on-chain CID
+          const ipfsData = await ipfsService.fetchProfile(cid);
+          if (ipfsData) {
+            setProfileData(ipfsData);
+            // Update localStorage cache
+            localStorage.setItem(`linko_profile_${normalizedAddress}`, JSON.stringify(ipfsData));
+          }
+        } catch (error) {
+          console.error('Error fetching from IPFS:', error);
+        }
+      } else if (!stored) {
+        // No data found anywhere, set empty profile
         setProfileData({
-          address: identifier,
+          address: normalizedAddress,
           name: '',
           bio: '',
           avatarUrl: '',
@@ -55,10 +107,51 @@ export default function UserProfilePage() {
     }
   };
 
-  const handleSaveProfile = (data: any) => {
-    const updatedData = { ...data, isEmpty: false };
+  const handleSaveProfile = async (data: any) => {
+    const normalizedAddress = identifier?.toLowerCase();
+    const updatedData = { ...data, address: normalizedAddress, isEmpty: false };
+
     setProfileData(updatedData);
-    localStorage.setItem(`linko_profile_${identifier}`, JSON.stringify(updatedData));
+    setIsSaving(true);
+    setSaveStatus('📤 Uploading to IPFS...');
+
+    // Save to localStorage immediately for quick access
+    localStorage.setItem(`linko_profile_${normalizedAddress}`, JSON.stringify(updatedData));
+
+    try {
+      // Upload to IPFS for decentralized storage
+      const ipfsUrl = await ipfsService.uploadProfile(updatedData);
+      if (!ipfsUrl) {
+        throw new Error('Failed to upload to IPFS');
+      }
+
+      // Extract CID from the URL
+      const cid = ipfsUrl.split('/ipfs/')[1]?.split('/')[0];
+      if (!cid) {
+        throw new Error('Failed to extract CID from IPFS URL');
+      }
+
+      console.log('Profile uploaded to IPFS:', ipfsUrl);
+      console.log('CID:', cid);
+
+      setSaveStatus('⛓️ Saving to blockchain...');
+
+      // Write CID to smart contract
+      writeContract({
+        ...linkoProfileConfig,
+        functionName: 'setProfileCID',
+        args: [cid],
+      });
+
+      // Transaction is pending, wait for confirmation via useEffect
+
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      setSaveStatus('❌ Error saving profile');
+      setIsSaving(false);
+      setTimeout(() => setSaveStatus(''), 3000);
+    }
+
     setIsEditing(false);
   };
 
@@ -89,7 +182,7 @@ export default function UserProfilePage() {
               <ConnectButton />
             </div>
           </div>
-          
+
           {/* Spacer for fixed header */}
           <div className="h-20 sm:h-24"></div>
 
@@ -143,7 +236,7 @@ export default function UserProfilePage() {
               <ConnectButton />
             </div>
           </div>
-          
+
           {/* Spacer for fixed header */}
           <div className="h-20 sm:h-24"></div>
 
@@ -175,7 +268,7 @@ export default function UserProfilePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#E8F5E9] via-white to-[#FFF8E1] overflow-x-hidden">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        
+
         {/* Header */}
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-3xl">
           <div className="bg-white/70 backdrop-blur-md border border-gray-200/50 rounded-2xl px-4 sm:px-6 py-4 shadow-lg flex justify-between items-center">
@@ -186,7 +279,7 @@ export default function UserProfilePage() {
             <ConnectButton />
           </div>
         </div>
-        
+
         {/* Spacer for fixed header */}
         <div className="h-20 sm:h-24"></div>
 
@@ -219,7 +312,7 @@ export default function UserProfilePage() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 sm:mb-3 leading-[1.1] tracking-tight">
             {profileData?.name || shortAddress}
           </h1>
-          
+
           {profileData?.name && (
             <p className="text-sm sm:text-base text-gray-500 mb-3 sm:mb-4 font-medium">{shortAddress}</p>
           )}
@@ -250,7 +343,8 @@ export default function UserProfilePage() {
             {isOwnProfile && (
               <button
                 onClick={() => setIsEditing(!isEditing)}
-                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white text-gray-900 rounded-full font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all border-2 border-gray-900 text-base sm:text-lg"
+                disabled={isSaving || isWritePending || isConfirming}
+                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white text-gray-900 rounded-full font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all border-2 border-gray-900 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isEditing ? '✕ Cancel' : '✏️ Edit Profile'}
               </button>
@@ -259,6 +353,20 @@ export default function UserProfilePage() {
               <ShareButton address={identifier} ensName={null} />
             </div>
           </div>
+
+          {/* Save Status */}
+          {saveStatus && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mb-6 text-center"
+            >
+              <div className="inline-block bg-white px-6 py-3 rounded-full shadow-lg border-2 border-gray-900 font-bold text-sm sm:text-base">
+                {saveStatus}
+              </div>
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Editor */}
@@ -283,7 +391,7 @@ export default function UserProfilePage() {
           <div className="space-y-4">
             {/* Nearby Connections */}
             {profileData?.interests && profileData.interests.length > 0 && (
-              <NearbyConnections 
+              <NearbyConnections
                 userInterests={profileData.interests}
                 userAddress={identifier}
               />

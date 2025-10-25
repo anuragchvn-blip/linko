@@ -45,7 +45,7 @@ export default function ProfilePage() {
         // Default profile
         setProfileData({
           name: '',
-          bio: 'Web3 enthusiast | Building on Base',
+          bio: 'Web3 enthusiast | Building on Polygon',
           avatarUrl: '',
           interests: [],
           links: [],
@@ -177,7 +177,7 @@ export default function ProfilePage() {
 
       {/* Nearby Connections */}
       {!isEditing && profileData?.interests && profileData.interests.length > 0 && (
-        <NearbyConnections 
+        <NearbyConnections
           userInterests={profileData.interests}
           userAddress={address || ''}
         />
@@ -218,12 +218,12 @@ export default function ProfilePage() {
       >
         Powered by{' '}
         <a
-          href="https://base.org"
+          href="https://polygon.technology"
           target="_blank"
           rel="noopener noreferrer"
           className="text-primary hover:underline font-medium"
         >
-          Base ⚡
+          Polygon ⚡
         </a>
       </motion.div>
     </div>

@@ -174,7 +174,7 @@ export default function InfoSection() {
 
             {/* Footer */}
             <p className="text-center text-xs text-gray-500 mt-4">
-              Powered by Base ⚡ | Free to use | Your data, your control
+              Powered by Polygon ⚡ | Free to use | Your data, your control
             </p>
           </motion.div>
         </motion.div>
