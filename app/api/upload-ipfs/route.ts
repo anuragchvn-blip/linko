@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ipfsStorage } from '@/lib/ipfs-storage';
 
+// Mark this route as dynamic (not static)
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const profileData = await request.json();
