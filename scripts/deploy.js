@@ -1,7 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-    console.log("Deploying LinkoProfile contract to Polygon Amoy testnet...");
+    const network = await hre.ethers.provider.getNetwork();
+    const networkName = network.chainId === 137n ? "Polygon Mainnet" : 
+                       network.chainId === 80002n ? "Polygon Amoy testnet" : 
+                       `Unknown network (chainId: ${network.chainId})`;
+    
+    console.log(`Deploying LinkoProfile contract to ${networkName}...`);
 
     const signers = await hre.ethers.getSigners();
     console.log("Number of signers available:", signers.length);
@@ -28,10 +33,18 @@ async function main() {
     console.log("\nNext steps:");
     console.log("1. Add this to your .env.local file:");
     console.log(`   NEXT_PUBLIC_CONTRACT_ADDRESS=${address}`);
-    console.log("\n2. Verify the contract on PolygonScan:");
-    console.log(`   npx hardhat verify --network polygonAmoy ${address}`);
-    console.log("\n3. View on PolygonScan:");
-    console.log(`   https://amoy.polygonscan.com/address/${address}`);
+    
+    if (network.chainId === 137n) {
+        console.log("\n2. Verify the contract on PolygonScan:");
+        console.log(`   npx hardhat verify --network polygon ${address}`);
+        console.log("\n3. View on PolygonScan:");
+        console.log(`   https://polygonscan.com/address/${address}`);
+    } else if (network.chainId === 80002n) {
+        console.log("\n2. Verify the contract on PolygonScan:");
+        console.log(`   npx hardhat verify --network polygonAmoy ${address}`);
+        console.log("\n3. View on PolygonScan:");
+        console.log(`   https://amoy.polygonscan.com/address/${address}`);
+    }
 }
 
 main()
